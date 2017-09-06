@@ -1,0 +1,19 @@
+#!/bin/bash
+
+function applyrule {
+	RULE=$1
+	TEXT=$3
+
+	RESULT=$(basex "$RULE")
+
+	if [ -n "$RESULT" ] ; then
+		echo "Violation: $RESULT $TEXT"
+    	echo
+	fi
+}
+
+applyrule 'doc("db.xml")//root[not(@sibe)]' or "must have sibe"
+applyrule 'doc("db.xml")//room[@public and not(@lock)]' or "is public, but does not have a lock"
+applyrule 'doc("db.xml")//room[count(workstation)>1 and count(divider)<1]' or "has more than one workstation, but no divider"
+applyrule 'doc("db.xml")//server/software[count(backup)<1]' or "has no backups"
+

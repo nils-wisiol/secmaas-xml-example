@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<root>
+  <!-- violates the sibe-rule -->
+
+  <room public="">
+    <!-- violates the lock-rule -->
+    <pc />
+  </room>
+  <room public="" lock="">
+    <pc />
+  </room>
+
+  <room public="" lock="">
+    <!-- violates the divider-rule -->
+    <workstation />
+    <workstation />
+  </room>
+  <room public="" lock="">
+    <workstation />
+	<divider />
+    <workstation />
+  </room>
+
+  <room>
+    <server>
+      <!-- violates the rule that all software needs backups -->
+      <software name="foo" />
+    </server>
+  </room>
+  <room>
+    <server>
+      <!-- violates the rule that all software needs backups -->
+      <software name="foo with backup">
+        <backup location="asdf" />
+      </software>
+    </server>
+  </room>
+</root>
+
